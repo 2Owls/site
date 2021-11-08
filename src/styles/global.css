@@ -1,0 +1,200 @@
+/* ./src/styles/global.css */
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+* {
+    box-sizing: border-box;
+}
+
+body {
+    font-family: din-2014, sans-serif;
+    font-style: normal;
+}
+
+.body-dark {
+    color: #cdcdcd;
+    background-color: #333333;
+}
+
+.body-yellow {
+    background-color: #DBD3AD;
+}
+
+.body-green {
+    background-color: #349090;
+}
+
+.body-homera {
+    color: #fff;
+    background-color: #2C3640;
+}
+
+.body-hendersons {
+    color: #333333;
+    background-color: #F7FFF7;
+}
+
+canvas {
+    width: 100%;
+    
+}
+
+.display-1 {
+    font-family: questa-grande, serif;
+    font-weight: 400;
+    font-style: normal;
+    z-index: 1;
+}
+
+.floating-text {
+    width: 20rem;
+    z-index: -50;
+}
+
+.logo {
+    width: 75px;
+    display: inline-block;
+    z-index: 16431382;
+}
+
+.card {
+    width: 100%;
+    height: auto;
+    min-height: 350px;
+    display: block;
+    color: #333333;
+    background: #cdcdcd;
+    border-radius: 0.5rem;
+
+    display: flex;
+    align-items: flex-end;    
+}
+
+.card .title h1 {
+    font-family: questa-grande, serif;
+    font-weight: 400;
+    font-weight: bold;
+
+    margin-bottom: 0;
+}
+
+.card .title {
+    font-weight: bold;
+    padding: 1rem;
+    width: 100%;
+    margin-bottom: 0;
+}
+
+.card.homera {
+    background: #FCDCCB url(../images/2owls_homera_header_alpha.png) 50% no-repeat;
+    background-size: 110%;
+    background-position-y: -60px;    
+    transition: 0.5;
+}
+
+.card.homera:hover {
+    background: #349090 url(../images/2owls_homera_header_alpha.png) 50% no-repeat;
+    background-size: 140%;
+    background-position-y: -120px; 
+}
+
+.card.hendersons {
+    background: #FCDCCB url(../images/2owls_homera_header_alpha.png) 50% no-repeat;
+    background-size: 110%;
+    background-position-y: -60px;    
+    transition: 0.5;
+}
+
+.card.hendersons:hover {
+    background: #349090 url(../images/2owls_homera_header_alpha.png) 50% no-repeat;
+    background-size: 140%;
+    background-position-y: -120px; 
+}
+
+.card:hover {
+    background: #349090;
+    transition: 0.5s;
+}
+
+
+
+
+
+footer {
+    text-align: center;
+    padding: 3rem;
+}
+
+@layer base {
+    h1 {
+      @apply text-2xl;
+    }
+    h2 {
+      @apply text-xl;
+    }
+  }
+
+@layer components {
+    .btn-red {
+        @apply py-2 px-4 bg-red-500 text-white font-semibold rounded-lg shadow-md hover:bg-red-700 focus:outline-none focus:ring-2 focus:ring-red-400 focus:ring-opacity-75;
+    }
+
+    .section {
+        @apply p-12 text-gray-500;
+    }
+    .section-testimonial {
+        @apply bg-owlgreen text-owlwhite;
+    }    
+  }  
+
+
+/* RESPONSIVE CSS
+-------------------------------------------------- */
+
+/* Extra small devices (portrait phones, less than 576px) */
+@media (max-width: 575.98px) { 
+
+    .logo {
+        width: 80px;
+    }
+
+    .floating-text {
+        display:none;
+    }    
+}
+
+/* Small devices (landscape phones, less than 768px) */
+@media (max-width: 767.98px) {
+ 
+ 
+}
+
+/* Medium devices (tablets, less than 992px) */
+@media (max-width: 991.98px) {
+ 
+    .floating-text {
+        display:none;
+    }   
+
+}
+
+/* Large devices (desktops, less than 1200px) */
+@media (max-width: 1199.98px) {
+ 
+ 
+}
+
+
+@media (min-width: 40em) {
+
+
+.featurette-heading {
+ font-size: 50px;
+}  
+ 
+} 
+
+@media (min-width: 62em) {
+
+}  
