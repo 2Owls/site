@@ -1,59 +1,33 @@
 import * as React from "react"
-import * as THREE from "three"
 import Layout from "../components/layout"
-import { Suspense, useRef, useState, useMemo } from 'react'
-import { Canvas, useFrame, useThree } from '@react-three/fiber'
-import { Html  } from '@react-three/drei'
+import { motion } from "framer-motion"
 import { Helmet } from "react-helmet"
-import Model from '../components/homera-room'
 import LogoDiamond from "../components/LogoDiamond"
 import { StaticImage } from "gatsby-plugin-image"
+import { Suspense, useRef } from 'react'
+import { Canvas } from '@react-three/fiber'
+import { EffectComposer, Bloom } from '@react-three/postprocessing'
+import { PresentationControls, Html} from '@react-three/drei'
+import Room from '../components/homera-room'
+import FadeUp from "../components/fadeUp"
 
-
-
-function Rig({ hover }) {
+function Scene() {
   const ref = useRef()
-  const { mouse, clock } = useThree()
-  const [size, set] = useState(0.5)
-  const [hidden, setVisible] = useState(false)
-  const [rEuler, rQuaternion] = useMemo(() => [new THREE.Euler(), new THREE.Quaternion()], [])
-  useFrame(() => {
-    if (ref.current) {
-      rEuler.set((-mouse.y * Math.PI) / 18, (mouse.x * Math.PI) / 12, 0)
-      ref.current.quaternion.slerp(rQuaternion.setFromEuler(rEuler), 0.2)
-    }
-  })
   return (
     <Suspense fallback={
       <Html center className="loader">
         <h1 className="display-1">LOADING</h1>
       </Html>
     }>   
-      <group ref={ref} >    
-        <Model castShadow scale={0.02} position={[0, 0, 0]} rotation={[0, 3.9, 0]}/>
-        <Html
-          className="floating-text"
-          distanceFactor={3}
-          position={[-4.5, 0, 0]}
-          transform>
-                  <div className="w-3">
-                    <LogoDiamond /> 
-                  </div>  
-                <br />
-                <h1 className="display-1 text-6xl text-owlgreen-dark">Homera</h1>
-                <hr />    
-                <p className="text-owlgray">Brand identity | Logo design | Website | Marketing materials | Social media | Press releases | Direct marketing | Email campaigns | Marketing strategy</p>
-        </Html>   
-        <mesh scale={10000} position={[100, -2.1, -1000]} rotation={[-Math.PI / 2, 0, 0]} receiveShadow>
-          <planeGeometry />
-          <meshPhongMaterial color="#FCDCCB" />
-        </mesh>     
-      </group>
+        <group position-y={0} dispose={null}>
+          <Room scale={1.6} position={[-0.5, -0.18, 0]} rotation={[0, Math.PI / 5, 0]}/>
+        </group>         
   </Suspense>
   )
 }
 
-const IndexPage = () => (
+
+const HomeraPage = () => (
   
   <Layout>
 
@@ -61,132 +35,133 @@ const IndexPage = () => (
       <body className="body-homera"></body>
     </Helmet>
 
-    <div className="h-screen">
-        <Canvas shadows camera={{ position: [0, 10, 20], fov: 15, near: 1, far: 1000, zoom: 0.5}}>  
-        <color attach="background" args={['#FCDCCB']} />
-        <fog attach="fog" args={['#FCDCCB', 10, 50]} /> 
-        <spotLight
-            castShadow
-            position={[-80, 60, -50]}  
-            shadow-mapSize-width={4096}
-            shadow-mapSize-height={4096}                  
-            penumbra={2}
-            intensity={0.5}
-          />      
-          <spotLight
-            castShadow
-            position={[-5, 20, 15]}
-            shadow-mapSize-width={4096}
-            shadow-mapSize-height={4096}                         
-            intensity={0.5}
-          />             
-            <Rig />  
+<section className="grid grid-cols-1 lg:grid-cols-2">
+
+    <div className="h-screen/34 lg:h-screen">
+        <Canvas flat dpr={[1, 2]} camera={{ fov: 25, position: [0, 2, 12] }}>
+          <color attach="background" args={['#e5c3d1']} />
+          <directionalLight position={[0, 5, 5]} intensity={3}/>
+          <PresentationControls global rotation={[0, -Math.PI / 4, 0]} polar={[0, Math.PI / 4]} azimuth={[-Math.PI / 4, Math.PI / 4]} snap={true}>
+              <Scene />
+          </PresentationControls>
+          <EffectComposer multisampling={8}>
+            <Bloom intensity={0.4} luminanceThreshold={0.8} luminanceSmoothing={0.01} kernelSize={5} />
+          </EffectComposer>          
         </Canvas>
+    </div>
+
+    <div className="flex lg:h-screen items-center justify-center order-last lg:order-first bg-owlwhite p-4 lg:p-8 text-center lg:text-left">
+      <motion.div className="md:w-2/3"
+        initial={{x: -300, opacity: 0}}
+        animate={{x: 0, opacity: 1}}
+        transition={{duration: 1}}
+      >
+        <div className="w-4 my-8 mx-auto lg:mx-8"><LogoDiamond/></div>  
+        <h1 className="display-1 w-full text-7xl xl:text-8xl text-owlgreen-dark">Homera</h1>
+        <motion.hr 
+          initial={{width: 0}}
+          animate={{width: "100%"}}
+          transition={{duration: 1.5}}                  
+        />   
+        <p className="text-owlgray">Brand identity | Logo design | Website | Marketing materials | Social media | Press releases | Direct marketing | Email campaigns | Marketing strategy</p>
+      </motion.div>
+    </div>
+    
+</section>          
+
+<section class="section text-owlwhite">
+    <div class="grid sm:grid-cols-2">
+      <FadeUp className="flex items-center justify-center">
+        <div className="w-2/3">
+          <h2 className="display-3 border-b py-2">About Homera</h2>
+          <p>Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book.</p>
+        </div>
+      </FadeUp>
+
+      <FadeUp className="flex items-center justify-center">
+        <div className="w-2/3">
+          <h2 className="display-3 border-b py-2">Our work</h2>
+          <p>Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book.</p>
+        </div>
+      </FadeUp>
+        
     </div>      
+</section>  
 
-
-<section class="section">
+<section class="section bg-homerapurple">
     <div class="container">
 
         <div className="w-100 flex justify-center">
           <StaticImage
-            src="../images/tile-homera-logo.jpg"
-            width={1000}
-            quality={95}
+            src="../images/homera-logo.svg"
             alt="Homera Logo"
-            objectFit="cover"
+            layout="constrained"
             />          
         </div>
 
-        <div class="flex">
-          <StaticImage
-            src="../images/tile-homera-cavity.jpg"
-            width={1000}
-            quality={95}
-            alt="Homera Example 1"
-            objectFit="cover"
-          />
-          <StaticImage
-            src="../images/tile-homera-box.jpg"
-            width={1000}
-            quality={95}
-            alt="Homera Example 2"
-            objectFit="cover"
-          />
-          <StaticImage
-            src="../images/tile-homera-house.jpg"
-            width={1000}
-            quality={95}
-            alt="Homera Example 3"
-            objectFit="cover"
-          />             
-        </div>                              
-        <div className="grid grid-cols-2 gap-32 pt-8">
-          <div>
-            <h1>The Brief:</h1>
-            <hr />         
-            <p className="lead work-p">Creation of a new B2B brand which would communicate the twin objectives of the company: improving homes for tenants and reducing costs for providers.</p>
-          </div> 
-          <div>
-            <h1>The Concept:</h1>
-            <hr />
-            <p className="lead work-p">We wanted the brand to reflect the company mission statement of turning houses into homes. This needed to be shown creatively with a strong, professional feel. Warm colours were used, along with images of blueprints and building blocks transitioning to cosy homes and interiors.</p>
-          </div>         
-        </div>     
+        <h1 className="display-1 text-center">The creation of a new brand wanting to make an impact in the industry.</h1>
+        </div>      
+</section> 
+
+<section class="section bg-owlwhite">
+  <div className="container">
+    <div className="flex items-center justify-center">            
+        <FadeUp className="sm:w-2/3 p-12">
+        <StaticImage
+          src="../images/homera_blueprint.png"  
+          alt="Homera Logo Blueprint"
+          objectFit="constrain"
+        />
+        </FadeUp>  
+    </div>  
   </div>
 </section>  
             
    
 <section className="section">
     <div className="container">
-      <div>
-        <StaticImage
-          src="../images/work-homera-logo-progress.svg"
-          width={2560}
-          quality={95}
-          alt="Homera Logo"
-          objectFit="cover"
-        />
-      </div>                    
+
+    <div class="flex">
+          <StaticImage
+            src="../images/tile-homera-cavity.jpg"
+            alt="Homera Example 1"
+            layout="constrained"
+          />
+          <StaticImage
+            src="../images/tile-homera-box.jpg"
+            alt="Homera Example 2"
+            layout="constrained"
+          />
+          <StaticImage
+            src="../images/tile-homera-house.jpg"
+            alt="Homera Example 3"
+            layout="constrained"
+          />             
+        </div>                  
     </div>
 </section>       
       
-      
-      
-      
-<section className="section">
-    <div className="container">  
-        <div className="text-center w-100 md:w-1/2 mx-auto">
-            <div>
-                <h1>The Solution:</h1>
-                <hr/>
-                <p className="lead work-p">The client had a name but no more. From that, the logo was created then extended out into a full brand identity, using striking imagery. This was then brought to life on a dynamic, informative website and through various other routes to the audience.</p>                
-            </div>    
-        </div>           
-        <div className="w-50 flex justify-center">
-            <StaticImage
+<section class="section bg-owlwhite">
+  <div className="container">
+    <div className="flex items-center justify-center">            
+        <FadeUp className="w-50 sm:w-2/3 p-12">
+        <StaticImage
             src="../images/tile-homera-balloon.png"
-            width={500}
-            quality={95}
-            alt="Homera Example 3"
-            objectFit="cover"
-          />                
-      </div>            
-      <div className="text-center w-100 md:w-1/2 mx-auto">       
-            <h1>Ongoing:</h1>
-            <hr />
-            <p class="lead">The marketing strategy was divised to ensure all objectives were being met through multiple channels and this is under constant review to ensure ROI and all targets are met.</p>   
-      </div>            
-    </div>
-</section>      
+            alt="Homera Balloon"
+            layout="constrained"
+          />  
+        </FadeUp>  
+    </div>  
+  </div>
+</section>          
 
 <section className="section section-testimonial">
     <div className="container">
-        <div className="w-1/2 mx-auto">
+        <div className="w-full md:w-1/2 mx-auto">
             <div className="text-right">
                 <h1 className="display-1 text-center">"2 Owls listened to everything we wanted, then used their vision to create a brand stronger than we could have imagined. They fit perfectly with our ethos and helped us to engage with our target client from the outset" </h1>
                 <hr />                
-                <h1 className="display-2">- Homera Ltd</h1>
+                <h1 className="text-4xl">- Homera Ltd</h1>
             </div>            
         </div>    
     </div>
@@ -197,4 +172,4 @@ const IndexPage = () => (
   </Layout>
 )
 
-export default IndexPage
+export default HomeraPage

@@ -3,100 +3,79 @@ import { Link } from "gatsby"
 import { StaticImage } from "gatsby-plugin-image"
 import Helmet from "react-helmet"
 import Layout from "../components/layout"
-import Seo from "../components/seo"
 import { motion } from "framer-motion"
-import Header from "../components/header"
+import ClientCard from "../components/ClientCard"
 
-const IndexPage = () => (
-  <Layout> 
-    <Seo title="Home" />
+const WorkPage = () => (
+
+  <Layout>
+    
 
     <Helmet>
     <body className="body-dark"></body>
     </Helmet>    
 
-    <section className="h-screen py-16 py-16 mt-32 text-owlwhite">
-      <div className="container mx-auto">
+    <section className="px-4 pt-16 mt-32 text-owlwhite">
 
-        <h1 className="text-owlgreen">Our Work</h1>
+      <div className="container">
+      <h1 className="text-owlwhite display-2 text-6xl text-left mb-16 border-b pb-4">Projects</h1>
 
-        <div className="grid grid-cols-2 gap-8">
-        
-        <motion.div 
-          whileHover={{ scale: 1.05 }}
-          whileTap={{ scale: 1 }}
-           >
-          <Link className="card homera" to="/work-homera/">
-            <motion.div 
-              initial={{x: -20}}
-              animate={{x: 0}}
-              transition={{duration: 0.5 }} 
-              className="title">
-              <h1>Homera</h1>
-              <motion.hr 
-                initial={{width: 0}}
-                animate={{width: "100%"}}
-                transition={{duration: 1}}                  
-              />
-            </motion.div>
-          </Link>
-        </motion.div>  
+        <div className="grid md:grid-cols-3 gap-4">
 
-        <motion.div 
-          whileHover={{ scale: 1.05 }}
-          whileTap={{ scale: 1 }}
-           >
-          <Link className="card hendersons" to="/work-hendersons/">
-            <motion.div 
-              initial={{x: -20}}
-              animate={{x: 0}}
-              transition={{duration: 0.5 }} 
-              className="title">
-              <h1>Hendersons</h1>
-              <motion.hr 
-                initial={{width: 0}}
-                animate={{width: "100%"}}
-                transition={{duration: 1, delay: 0.5}}                  
-              />
-            </motion.div>
-          </Link>
-        </motion.div>  
-          
-        <motion.div 
-          whileHover={{ scale: 1.05 }}
-          whileTap={{ scale: 1 }}
-           >
-          <Link className="card homera h-64" to="/work-homera/">
-            <motion.div 
-              initial={{x: -20}}
-              animate={{x: 20}}
-              transition={{duration: 0.5 }} 
-            className="title">
-              <h1 className="display-1">Homera</h1>
-            </motion.div>
-          </Link>
-        </motion.div>  
-
-        <motion.div 
-          whileHover={{ scale: 1.05 }}
-          whileTap={{ scale: 1 }}
-           >
-          <Link className="card homera h-64" to="/work-homera/">
-            <motion.div 
-              initial={{x: -20}}
-              animate={{x: 20}}
-              transition={{duration: 0.5 }} 
-            className="title">
-              <h1 className="display-1">Homera</h1>
-            </motion.div>
-          </Link>
-        </motion.div>  
+            <div className="md:col-span-2">
+                <ClientCard 
+                  client="hendersons"
+                  clientname="Hendersons"
+                  bg="#cdcdcd"
+                />  
+            </div>
+            <div className="h-full md:row-span-2">
+                <ClientCard 
+                  client="together"
+                  clientname="Together Compliance"
+                  bg="#EAD8B0"
+                /> 
+            </div>
+            <div>
+                <ClientCard 
+                  client="homera"
+                  clientname="Homera"
+                  bg="#FCDCCB"
+                />         
+            </div>
+            <div>
+                <ClientCard 
+                  client="just"
+                  clientname="Just"
+                  bg="#cdcdcd"
+                />    
+            </div>         
 
         </div>
       </div>
 
     </section>    
+
+    <section className="px-4 pb-8 mt-32 text-owlwhite">
+
+      <div className="container">
+      <h1 className="text-owlwhite display-2 text-6xl text-left mb-16 border-b pb-4">Models</h1>
+
+        <div className="grid md:grid-cols-3 gap-4">
+
+            <div className="md:col-span-2">
+                <ClientCard 
+                  client="snowspeeder"
+                  clientname="Snowspeeder"
+                  bg="#cdcdcd"
+                />  
+            </div>     
+
+        </div>
+      </div>
+
+</section>        
   </Layout>
 )
 
-export default IndexPage
+export default WorkPage

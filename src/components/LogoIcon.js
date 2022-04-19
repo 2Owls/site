@@ -4,7 +4,6 @@ const LogoIcon = () => (
 <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 105.83 147.53">
 <g id="Layer_2" data-name="Layer 2">
 <g id="Layer_1-2" data-name="Layer 1">
-<rect width="105.83" height="147.53" fill="#E63946"/>
 <g id="o">
 <path d="M20,129.48a7.86,7.86,0,0,1,8.24-8,8.05,8.05,0,1,1,0,16.1A7.86,7.86,0,0,1,20,129.48Zm12.6,0a4.36,4.36,0,1,0-4.36,4.5A4.23,4.23,0,0,0,32.64,129.48Z" fill="#F7FFF7"/></g>
 <g id="w">

@@ -8,8 +8,12 @@
 }
 
 body {
-    font-family: din-2014, sans-serif;
+    font-family: din-2014, sans-serif !important;
     font-style: normal;
+}
+
+nav {
+    z-index: 1000;
 }
 
 .body-dark {
@@ -31,47 +35,84 @@ body {
 }
 
 .body-hendersons {
-    color: #333333;
-    background-color: #F7FFF7;
+    color: #F7FFF7;
+    background-color: #242423;
 }
 
-canvas {
-    width: 100%;
-    
+.body-together {
+    color: #F7FFF7;
+    background-color: #172A3A;
+}
+
+.together {
+    background: #DBD3AD url(../images/bg-together.jpg) 50% 50% no-repeat;
+    background-size: cover;    
+}
+
+.hendersons {
+    background: #DBD3AD url(../images/bg-hendersons.jpg) 50% 50% no-repeat;
+    background-size: cover;    
+}
+
+.jkh {
+    background: #DBD3AD url(../images/jkh_header.jpg) 50% 50% no-repeat;
+    background-size: cover;    
+}
+
+
+.title {
+    background: #333333;
+}
+
+.header {
+    background: #D9AF67 url(../images/owl_header2.jpg) 50% 50% no-repeat;
+    background-size: cover;
 }
 
 .display-1 {
-    font-family: questa-grande, serif;
-    font-weight: 400;
+    font-family: din-2014, sans-serif;
+    font-weight: 200;
     font-style: normal;
-    z-index: 1;
 }
 
-.floating-text {
-    width: 20rem;
-    z-index: -50;
+.display-2 {
+    font-family: forma-djr-deck, sans-serif;
+    font-weight: 600;
+    font-style: normal;
+}
+
+.display-3 {
+    font-family: din-2014, sans-serif !important;
+    font-size: 1rem;
+    font-weight: 600;
+    font-style: normal;
+    text-transform: uppercase;
+}
+
+.page-header {
+    position: relative;
+    min-height: 100vh;
 }
 
 .logo {
     width: 75px;
-    display: inline-block;
-    z-index: 16431382;
+    margin: 0 auto;
+    display: block;
 }
 
 .card {
     width: 100%;
-    height: auto;
+    height: 100%;
     min-height: 350px;
     display: block;
     color: #333333;
-    background: #cdcdcd;
     border-radius: 0.5rem;
 
     display: flex;
     align-items: flex-end;    
 }
 
-.card .title h1 {
+.card .work-title h1 {
     font-family: questa-grande, serif;
     font-weight: 400;
     font-weight: bold;
@@ -79,42 +120,36 @@ canvas {
     margin-bottom: 0;
 }
 
-.card .title {
-    font-weight: bold;
+.card .work-title {
     padding: 1rem;
     width: 100%;
     margin-bottom: 0;
 }
 
 .card.homera {
-    background: #FCDCCB url(../images/2owls_homera_header_alpha.png) 50% no-repeat;
-    background-size: 110%;
-    background-position-y: -60px;    
-    transition: 0.5;
-}
-
-.card.homera:hover {
-    background: #349090 url(../images/2owls_homera_header_alpha.png) 50% no-repeat;
-    background-size: 140%;
-    background-position-y: -120px; 
+    background: url(../images/work_homera_thumb.png) 50% no-repeat;
 }
 
 .card.hendersons {
-    background: #FCDCCB url(../images/2owls_homera_header_alpha.png) 50% no-repeat;
-    background-size: 110%;
-    background-position-y: -60px;    
-    transition: 0.5;
+    background:  url(../images/work_hendersons_thumb.png) 50% no-repeat;
 }
 
-.card.hendersons:hover {
-    background: #349090 url(../images/2owls_homera_header_alpha.png) 50% no-repeat;
-    background-size: 140%;
-    background-position-y: -120px; 
+.card.together {
+    background:  url(../images/work_together_thumb.png) 50% no-repeat;
 }
 
-.card:hover {
-    background: #349090;
-    transition: 0.5s;
+.card.just {
+    background:  url(../images/jkh_header.jpg) 50% no-repeat;
+    background-blend-mode: lighten;
+}
+
+.card.snowspeeder {
+    background:  url(../images/work-snowspeeder.png) 50% no-repeat;
+    background-blend-mode: lighten;
+}
+
+input {
+    border-radius: 0.375rem;
 }
 
 
@@ -122,6 +157,8 @@ canvas {
 
 
 footer {
+    width: 100%;
+    display: block;
     text-align: center;
     padding: 3rem;
 }
@@ -141,11 +178,18 @@ footer {
     }
 
     .section {
-        @apply p-12 text-gray-500;
+        @apply py-24 px-5 text-gray-500;
     }
     .section-testimonial {
         @apply bg-owlgreen text-owlwhite;
     }    
+    .section-white {
+        @apply bg-owlwhite text-owlgreen;
+    }  
+
+    .section-gray {
+        @apply bg-owlgray text-owlgreen;
+    }      
   }  
 
 
@@ -167,6 +211,9 @@ footer {
 /* Small devices (landscape phones, less than 768px) */
 @media (max-width: 767.98px) {
  
+    .slide-content {
+        width: 80%;
+    }
  
 }
 

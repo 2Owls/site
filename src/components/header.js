@@ -1,40 +1,31 @@
 import * as React from "react"
-import PropTypes from "prop-types"
-import { AnimateSharedLayout } from "framer-motion"
-import { motion } from "framer-motion"
+import { AnimatePresence } from "framer-motion"
+import { motion, useCycle } from "framer-motion"
 import LogoBtn from "../components/logoBtn"
-import Panel from "../components/panel"
 
-function Header({ }) {
+function Header() {
   
-  const [open, setOpen] = React.useState(false);
-  const toggleOpen = event => {
-  event.preventDefault()
-  setOpen(!open);
-}
+  const variants = {
+    open: { height: "auto" },
+    closed: { height: "120px"},
+  }
+
+  const [isOpen, toggleOpen] = useCycle(false, true);
+
 
 return (
-  <header className="relative justify-items-center">
-    <nav className="fixed inset-x-0 top-0 left-2/4 z-50">
-    <AnimateSharedLayout>
-        <motion.button 
-        transition={{duration: 1}}
-        onClick={toggleOpen}>
-          {open ? <Panel />  : <LogoBtn /> }
-        </motion.button>
-      </AnimateSharedLayout>
-
-    </nav>
-  </header>
+  <AnimatePresence>
+    <motion.nav layoutId="nav"
+      className="w-20 fixed inset-x-0 mx-auto top-0 justify-center overflow-hidden bg-owlred rounded-b-lg"
+      animate={isOpen ? "open" : "closed"}
+      whileHover={{ height: "auto" }} 
+      exit={{overflow: "hidden"}}   
+      variants={variants}
+    >
+      <LogoBtn toggle={() => toggleOpen()}/>
+    </motion.nav>
+  </AnimatePresence>    
 )
-
-Header.propTypes = {
-  siteTitle: PropTypes.string,
-}
-
-Header.defaultProps = {
-  siteTitle: ``,
-}
 
 }
 

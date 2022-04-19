@@ -5,19 +5,18 @@ import { motion } from 'framer-motion';
 
 const panel = () => (
 
-    <motion.div layoutId="panel" className="fixed inset-x-0 top-0 w-full h-3/6 pb-8 justify-center bg-owlred">
-        <div className="container">
-            <div className="w-1/2 mx-auto">
-                <div className="logo inline-block">
+    <motion.div layout layoutId="panel" className="fixed inset-x-0 mx-auto top-0 w-3/6 h-3/6 pb-8 flex flex-col justify-center bg-owlred rounded-b-md pt-2">
+        <div className="container-sm">        
+                <motion.div layout layoutId="logo" className="logo">
                     <LogoIcon />
-                </div>
+                </motion.div>
+                
                 <div className="w-56 inline-block flex flex-col mx-auto">
-                    <Link to="/" className="pt-2 m-3 text-xl text-owlwhite">Home</Link>                   
-                    <Link to="/work/" className="pt-2 m-3 text-xl text-owlwhite">Work</Link>   
-                    <Link to="/contact/" className="pt-2 m-3 text-xl text-owlwhite">Contact</Link>
-                </div> 
-            </div>    
-        </div>    
+                    <Link to="/" className="pt-2 m-3 text-xl text-owlwhite">HOME</Link>                   
+                    <Link to="/work/" className="pt-2 m-3 text-xl text-owlwhite">WORK</Link>   
+                    <Link to="/contact/" className="pt-2 m-3 text-xl text-owlwhite">CONTACT</Link>
+                </div>  
+        </div>      
     </motion.div>
 
 );    

@@ -8,9 +8,10 @@
 import * as React from "react"
 import PropTypes from "prop-types"
 import { useStaticQuery, graphql } from "gatsby"
-import {motion} from "framer-motion"
 import Header from "./header"
 import "./layout.css"
+import { StaticImage } from "gatsby-plugin-image"
+import { Link } from "gatsby";
 
 const Layout = ({ children, path }) => {
   const data = useStaticQuery(graphql`
@@ -26,24 +27,29 @@ const Layout = ({ children, path }) => {
   return (
     <>
         <Header/>   
-        <motion.main
-          key={path}
-          initial={{ opacity: 0, y: 30 }}
-          animate={{ opacity: 1, y: 0 }}
-          exit={{ opacity: 0, y: -30 }}
-          transition={{
-            type: "spring",
-            mass: 0.35,
-            stiffness: 75,
-            duration: 0.5,
-          }}
-        >
+        <main>
           {children}
-        </motion.main>
-        <footer>
-          © {new Date().getFullYear()}, Built by
-          {` `}
-          <a href="https://www.2owls.co.uk">owls</a>
+        </main>
+        <footer className="border-t flex flex-col" > 
+          <div>
+            <StaticImage
+                className="w-16"
+                src="../images/owl_eyes.svg"
+                alt="Owl Eyes"
+                layout="constrained"
+                />   
+            </div>
+            <div className="mt-4 text-2xl text-center">
+            <Link to="/">HOME </Link>
+              |               
+              <Link to="/work"> WORK </Link>
+              | 
+              <Link to="/contact"> CONTACT</Link>
+            </div>        
+          <div className="mt-4 text-sm">
+              © {new Date().getFullYear()} // Built by Owls
+              {` `}
+          </div>
         </footer>
     </>
   )
